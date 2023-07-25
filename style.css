@@ -1,0 +1,796 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  /* background-color: #514132; */
+  background-color: #CCBFAD;
+  margin-bottom: -5px;
+}
+
+.home {
+  background-image: url("./banner-item.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 95vh;
+  transition: .3s;
+
+}
+.para {
+  font-size: 20px;
+}
+
+.logo h2 {
+  letter-spacing: 3px;
+}
+
+body {
+  background-color: #CCBFAD;
+}
+
+
+
+
+.back_img {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 4%;
+  height: 15vh;
+}
+
+
+.card-area {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-evenly;
+  padding: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #CCBFAD;
+}
+
+/* Card ============================================*/
+
+/* Area to hold an individual card */
+.card-section {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+/* A container to hold the flip card and the inside page */
+.card-service {
+  background-color: rgba(0, 0, 0, .05);
+  box-shadow: -.1rem 1.7rem 6.6rem -3.2rem rgba(0, 0, 0, 0.5);
+  height: 15rem;
+  position: relative;
+  transition: all 1s ease;
+  width: 15rem;
+}
+
+/* Flip card - covering both the front and inside front page */
+
+/* An outer container to hold the flip card. This excludes the inside page */
+.flip-card {
+  height: 15rem;
+  perspective: 100rem;
+  position: absolute;
+  right: 0;
+  transition: all 1s ease;
+  visibility: hidden;
+  width: 15rem;
+  z-index: 100;
+}
+
+/* The outer container's visibility is set to hidden. This is to make everything within the container NOT set to hidden  */
+/* This is done so content in the inside page can be selected */
+.flip-card>* {
+  visibility: visible;
+}
+
+/* An inner container to hold the flip card. This excludes the inside page */
+.flip-card__container {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  width: 100%;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Styling for the front side of the flip card */
+
+/* container for the front side */
+.card-front {
+  background-color: #fafbfa;
+  height: 15rem;
+  width: 15rem;
+}
+
+.card-front__heading {
+  color: white;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Front side's top section */
+.card-front__tp {
+  align-items: center;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 57% 90%, 50% 100%, 43% 90%, 0 90%);
+  display: flex;
+  flex-direction: column;
+  height: 12rem;
+  justify-content: center;
+  padding: 0 .75rem;
+}
+
+.card-front__tp--city {
+  background: linear-gradient(to bottom,
+      #3F3930,
+      #A66A3D);
+}
+
+.card-front__tp--strat {
+  background: linear-gradient(to bottom,
+      #D0A76E,
+      #855439);
+}
+
+.card-front__tp--social {
+  background: linear-gradient(to bottom,
+      #B08C77,
+      #673F0F);
+}
+
+.card-front__tp--media {
+  background: linear-gradient(to bottom,
+      #9A7B4F,
+      #481F01);
+}
+
+.card-front__tp--speaker {
+  background: linear-gradient(to bottom,
+      #80481B,
+      #352315);
+}
+
+/* Front card's bottom section */
+.card-front__bt {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #95613A;
+}
+
+/* Styling for the back side of the flip card */
+
+.card-back {
+  background-color: #fafbfa;
+  transform: rotateY(180deg);
+}
+
+/* Specifically targeting the <video> element */
+.video__container {
+  clip-path: polygon(0% 0%, 100% 0%, 90% 50%, 100% 100%, 0% 100%);
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Inside page */
+
+.inside-page {
+  background-color: #fafbfa;
+  box-shadow: inset 20rem 0px 5rem -2.5rem rgba(0, 0, 0, 0.25);
+  height: 100%;
+  padding: 1rem;
+  position: absolute;
+  right: 0;
+  transition: all 1s ease;
+  width: 15rem;
+  z-index: 1;
+
+}
+
+.inside-page__container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+
+}
+
+.inside-page__text {
+  font-size: 13px;
+  text-align: left;
+}
+
+.inside-page__heading {
+  color: #95613A;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-top: 0.2rem;
+}
+
+/* Functionality ====================================*/
+
+/* This is to keep the card centered (within its container) when opened */
+.card-service:hover {
+  box-shadow:
+    -.1rem 1.7rem 6.6rem -3.2rem rgba(0, 0, 0, 0.75);
+  width: 30rem;
+}
+
+/* When the card is hovered, the flip card container will rotate */
+.card-service:hover .flip-card__container {
+  transform: rotateY(-180deg);
+}
+
+/* When the card is hovered, the shadow on the inside page will shrink to the left */
+.card-service:hover .inside-page {
+  box-shadow: inset 1rem 0px 5rem -2.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Footer ====================================*/
+
+.footer {
+  background-color: #333;
+  margin-top: 3rem;
+ padding: 1rem 0;
+  width: 100%;
+
+}
+
+.footer-text {
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.tryyy {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+}
+
+.wwd {
+
+  background-color: white;
+  padding: 5px;
+}
+
+.cream-bg {
+  background-color: #CCBFAD;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-bottom-right-radius: 0px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 5px;
+}
+
+.content_section {
+  display: flex;
+  padding: 60px;
+  /* overflow: hidden; */
+
+}
+
+/* .about .row .col-4 .img
+{
+margin: auto;
+width: 100%;
+height: 600px;
+} */
+@media (max-width:600px) {
+
+  .content_section {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    /* overflow: hidden; */
+
+  }
+
+  .card-section {
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width:1000px) {
+  .about .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about .row .col-8,
+  .about .row .col-4 {
+    width: 100%;
+  }
+
+  .about .row .col-4 .img {
+    margin: auto;
+    width: 100%;
+  }
+
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 24px;
+}
+
+.text_animate {
+  font-weight: 700;
+  text-align: center;
+  padding-top: 20%;
+  font-size: 40px;
+  font-family: Hack, sans-serif;
+  background: linear-gradient(90deg, #6b6b6b, #fff, #6d6d6d);
+  letter-spacing: 5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: shine 5s linear infinite;
+  position: relative;
+  align-items: center;
+}
+
+
+@keyframes shine {
+  0% {
+    background-position-x: -500%;
+  }
+
+  100% {
+    background-position-x: 500%;
+  }
+}
+
+/*  Checkout my other pens on  https://codepen.io/grohit/  */
+
+.section_heading {
+  text-align: center;
+  font-weight: 700;
+  color: rgb(63, 57, 48);
+  margin: 3rem 0;
+  font-size: 2.5rem;
+}
+
+.section_subheading {
+
+  font-weight: 600;
+  color: rgb(63, 57, 48);
+  margin: 2rem 0;
+  font-size: 1.6rem;
+}
+
+.section_padding {
+  padding: 1rem 0;
+}
+
+.about p {
+  font-size: 20px;
+}
+
+.about button {
+  background-color: #3d3d3d;
+  border: none;
+  padding: 10px 20px;
+  width: 200px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.about .social_icons i {
+  font-size: 30px;
+  margin: 20px 15px;
+  cursor: pointer;
+
+}
+
+.about .social_icons {
+  padding: 20px 0
+}
+
+.back {
+  display: block;
+  background-attachment: fixed;
+  background-image: url("./images/image-006.jpg");
+  background-size: cover;
+
+  height: 50vh;
+  width: 100%;
+
+
+}
+
+
+
+.footer span {
+  font-size: 16px;
+  color: white;
+}
+.footer li {
+  margin: 20px 0;
+  color: white;
+  font-size: 17px;
+}
+.footer li span{
+  font-size: 25px;
+  margin: 0px 10px;
+}
+.footer .container h2{
+  color: white;
+  font-size: 25px;
+  padding-top: 50px;
+  padding-left: 28px;
+}
+
+.inside-page a {
+  position: absolute;
+  bottom: 10px;
+
+}
+
+#pc_res {
+  display: block;
+}
+
+#mobile_res {
+  display: none;
+  text-align: justify;
+}
+
+@media(max-width:1000px) {
+  #mobile_res {
+    display: block;
+  }
+
+  #mobile_res .card {
+    margin: 10px auto;
+  }
+
+  #pc_res {
+    display: none;
+  }
+
+}
+
+.mobile_back {
+  display: none;
+}
+
+@media(max-width:900px) {
+  .back {
+    display: none;
+
+  }
+
+  .mobile_back {
+    display: block;
+  }
+  
+.text_animate {
+
+  padding-top: 50%;
+  
+}
+/* .home{
+  height: 60vh;
+  transition: .3s;
+} */
+
+}
+
+.card {
+  height: 26rem;
+}
+
+.card .card-body a {
+  position: absolute;
+  bottom: 10px;
+  left: 15%;
+}
+
+.Services .col-sm-4 div {
+  border-top: 3px solid #aba193;
+  padding: 20px;
+  transition: .3s;
+}
+
+.Services .col-sm-4 div:hover {
+  background-color: #b7ad9d;
+  border-top: 3px solid black;
+  transition: .3s;
+}
+
+.PR_practice li{
+  font-size: 17px;
+  margin: 5px 0;
+}
+
+
+.contact_us_2 {
+  font-family: Nunito, sans-serif;
+}
+
+.contact_us_2 .text-blk {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  line-height: 25px;
+}
+
+.contact_us_2 .responsive-cell-block {
+  min-height: 75px;
+}
+
+.contact_us_2 input:focus {
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+}
+
+.contact_us_2 .container-block {
+  min-height: 75px;
+  width: 100%;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  display: block;
+}
+
+
+.contact_us_2 .responsive-container-block {
+  min-height: 50px;
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 50px;
+  margin-left: auto;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+
+.contact_us_2 .responsive-container-block.container {
+  position: static;
+  min-height: 75px;
+  flex-direction: column;
+  z-index: 2;
+  max-width: 800px;
+  margin-top: 75px;
+  margin-right: auto;
+  margin-bottom: 50px;
+  margin-left: auto;
+}
+
+
+
+
+.contact_us_2 .responsive-cell-block.wk-desk-6.wk-ipadp-6.wk-tab-12.wk-mobile-12 {
+  margin-bottom: 26px;
+  min-height: 50px;
+}
+
+.contact_us_2 .input {
+  width: 96%;
+  height: 50px;
+  padding-top: 1px;
+  padding-right: 15px;
+  padding-bottom: 1px;
+  padding-left: 15px;
+  opacity: .6;
+  border: none;
+  border-radius: 5px;
+
+}
+
+.contact_us_2 .textinput {
+  width: 98%;
+  min-height: 150px;
+  padding-top: 20px;
+  padding-right: 15px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  font-size: 16px;
+  border: none;
+  opacity: .6;
+  border-radius: 5px;
+}
+
+.contact_us_2 .textinput:focus {
+  border: none;
+  outline: none;
+}
+
+
+.contact_us_2 .text-blk.input-title {
+  text-align: left;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 600;
+  opacity: .8;
+}
+
+.contact_us_2 ::placeholder {
+  color: #dadada;
+}
+.submit-btn{
+border: none;
+background-color: #673F0F;
+color: white;
+padding: 7px ;
+width: 200px;
+transition: .2s;
+
+}
+
+.submit-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.submit-btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.submit-btn:hover span {
+  padding-right: 25px;
+}
+
+.submit-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.wk-desk-1 {
+  width: 8.333333%;
+}
+
+.wk-desk-2 {
+  width: 16.666667%;
+}
+
+.wk-desk-3 {
+  width: 25%;
+}
+
+.wk-desk-4 {
+  width: 33.333333%;
+}
+
+.wk-desk-5 {
+  width: 41.666667%;
+}
+
+.wk-desk-6 {
+  width: 50%;
+}
+
+.wk-desk-7 {
+  width: 58.333333%;
+}
+
+.wk-desk-8 {
+  width: 66.666667%;
+}
+
+.wk-desk-9 {
+  width: 75%;
+}
+
+.wk-desk-10 {
+  width: 83.333333%;
+}
+
+.wk-desk-11 {
+  width: 91.666667%;
+}
+
+.wk-desk-12 {
+  width: 100%;
+}
+
+
+
+@media (max-width: 768px) {
+  .wk-tab-1 {
+    width: 8.333333%;
+  }
+
+  .wk-tab-2 {
+    width: 16.666667%;
+  }
+
+  .wk-tab-3 {
+    width: 25%;
+  }
+
+  .wk-tab-4 {
+    width: 33.333333%;
+  }
+
+  .wk-tab-5 {
+    width: 41.666667%;
+  }
+
+  .wk-tab-6 {
+    width: 50%;
+  }
+
+  .wk-tab-7 {
+    width: 58.333333%;
+  }
+
+  .wk-tab-8 {
+    width: 66.666667%;
+  }
+
+  .wk-tab-9 {
+    width: 75%;
+  }
+
+  .wk-tab-10 {
+    width: 83.333333%;
+  }
+
+  .wk-tab-11 {
+    width: 91.666667%;
+  }
+
+  .wk-tab-12 {
+    width: 100%;
+  }
+}
