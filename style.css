@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 1px;
 }
 
 .logo {
@@ -27,7 +27,7 @@
 }
 
 body {
-  background-color: #CCBFAD;
+  background-color: #d2c7b7;
 }
 
 
@@ -257,8 +257,8 @@ body {
 
 .footer {
   background-color: #333;
-  margin-top: 3rem;
- padding: 1rem 0;
+  /* margin-top: 3rem; */
+ /* padding: 1rem 0; */
   width: 100%;
 
 }
@@ -442,21 +442,21 @@ a {
 
 
 .footer span {
-  font-size: 16px;
+  font-size: 15px;
   color: white;
 }
 .footer li {
   margin: 20px 0;
   color: white;
-  font-size: 17px;
+  font-size: 15px;
 }
 .footer li span{
-  font-size: 25px;
+  font-size: 15px;
   margin: 0px 10px;
 }
 .footer .container h2{
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   padding-top: 50px;
   padding-left: 28px;
 }
